@@ -138,4 +138,6 @@ log/
 *.srt
 *.txt
 *.bin
-sync.ffs_db
+
+docs/env_settings.md
+新文字文件.bat
