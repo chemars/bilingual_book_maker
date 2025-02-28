@@ -51,7 +51,7 @@ GPT4o_MODEL_LIST = [
 
 
 class ChatGPTAPI(Base):
-    DEFAULT_PROMPT = "Please help me to translate,`{text}` to {language}, please return only translated content not include the origin text"
+    DEFAULT_PROMPT = "Please help me to translate,`{text}` to {language} #zh-tw, please return only translated content not include the origin text"
 
     def __init__(
         self,
@@ -60,7 +60,7 @@ class ChatGPTAPI(Base):
         api_base=None,
         prompt_template=None,
         prompt_sys_msg=None,
-        temperature=1.0,
+        temperature=0.1,
         context_flag=False,
         context_paragraph_limit=0,
         **kwargs,

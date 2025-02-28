@@ -1,6 +1,6 @@
 import json
 import time
-
+import deepl
 import requests
 import re
 
@@ -17,17 +17,13 @@ class DeepL(Base):
 
     def __init__(self, key, language, **kwargs) -> None:
         super().__init__(key, language)
-        self.api_url = "https://dpl-translator.p.rapidapi.com/translate"
-        self.headers = {
-            "content-type": "application/json",
-            "X-RapidAPI-Key": "",
-            "X-RapidAPI-Host": "dpl-translator.p.rapidapi.com",
-        }
         l = None
         l = language if language in LANGUAGES else TO_LANGUAGE_CODE.get(language)
         if l not in [
             "bg",
             "zh",
+            "zh-hant",
+            "zh-hans",
             "cs",
             "da",
             "nl",
@@ -62,28 +58,18 @@ class DeepL(Base):
         self.language = l
 
     def rotate_key(self):
-        self.headers["X-RapidAPI-Key"] = f"{next(self.keys)}"
+        pass
 
     def translate(self, text):
         self.rotate_key()
+        translator = deepl.Translator(f"{next(self.keys)}")
         print(text)
-        payload = {"text": text, "source": "EN", "target": self.language}
         try:
-            response = requests.request(
-                "POST",
-                self.api_url,
-                data=json.dumps(payload),
-                headers=self.headers,
-            )
+            result = translator.translate_text(text, target_lang=self.language)
         except Exception as e:
             print(e)
             time.sleep(30)
-            response = requests.request(
-                "POST",
-                self.api_url,
-                data=json.dumps(payload),
-                headers=self.headers,
-            )
-        t_text = response.json().get("text", "")
+            result = translator.translate_text(text, target_lang=self.language)
+        t_text = result.text
         print("[bold green]" + re.sub("\n{3,}", "\n\n", t_text) + "[/bold green]")
         return t_text

@@ -5,7 +5,7 @@ LANGUAGES = {
     "en": "english",
     "zh-hans": "simplified chinese",
     "zh": "simplified chinese",
-    "zh-hant": "traditional chinese",
+    "zh-hant": "正體中文",
     "zh-yue": "cantonese",
     "de": "german",
     "es": "spanish",

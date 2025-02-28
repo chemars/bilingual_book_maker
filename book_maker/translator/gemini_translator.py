@@ -13,7 +13,7 @@ from rich import print
 from .base_translator import Base
 
 generation_config = {
-    "temperature": 1.0,
+    "temperature": 0.1,
     "top_p": 1,
     "top_k": 1,
     "max_output_tokens": 8192,
@@ -52,7 +52,7 @@ class Gemini(Base):
     Google gemini translator
     """
 
-    DEFAULT_PROMPT = "Please help me to translate,`{text}` to {language}, please return only translated content not include the origin text"
+    DEFAULT_PROMPT = "Please help me to translate,`{text}` to {language} #zh-tw, please return only translated content not include the origin text"
 
     def __init__(
         self,
@@ -61,7 +61,7 @@ class Gemini(Base):
         prompt_template=None,
         prompt_sys_msg=None,
         context_flag=False,
-        temperature=1.0,
+        temperature=0.1,
         **kwargs,
     ) -> None:
         super().__init__(key, language)
